@@ -134,7 +134,7 @@ gulp.task 'watch', () ->
   gulp.watch path.app.styles, ['styles']
   gulp.watch path.app.bower, ['bowerjs', 'bowercss']
   gulp.watch path.app.templates, ['templates']
-  gulp.watch path.app.images, ['images']
+  gulp.watch path.app.images, ['assets']
 
 gulp.task 'clean', (cb) ->
   del(['www/**'], cb)
