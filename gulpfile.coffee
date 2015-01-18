@@ -32,6 +32,7 @@ path =
     templates: "client/app/**/*.{html,jade}" # All html, jade, and markdown files used as templates within the app
     images: "client/app/images/*.{png,jpg,jpeg,gif,ico}" # All image files
     static: "client/app/static/*.*" # Any other static content such as the favicon
+    lib: "client/lib/**/*"
 
 tasks = {}
 
@@ -54,7 +55,7 @@ gulp.task 'scripts', tasks.scripts = () ->
     .pipe(rename({extname: ".min.js"}))
     .pipe(size())
     .pipe(gulp.dest "www/js")
-    .pipe(livereload())
+    # .pipe(livereload())
 gulp.task 'scripts:clean', ['clean'], tasks.scripts
 
 gulp.task "styles", tasks.styles = ->
@@ -80,14 +81,14 @@ gulp.task "styles", tasks.styles = ->
     .pipe(rename({extname: ".min.css"}))
     .pipe(size())
     .pipe(gulp.dest "www/css")
-    .pipe(livereload())
+    # .pipe(livereload())
 gulp.task 'styles:clean', ['clean'], tasks.styles
 
 gulp.task 'templates', tasks.templates = ->
   gulp.src path.app.templates
     .pipe(size())
     .pipe(gulp.dest('www'))
-    .pipe(livereload())
+    # .pipe(livereload())
 gulp.task 'templates:clean', ['clean'], tasks.templates
 
 gulp.task 'jquery', tasks.jquery = ->
@@ -117,11 +118,18 @@ gulp.task 'assets', tasks.assets = ->
     .pipe(imagemin({optimizationLevel: 5}))
     .pipe(size())
     .pipe(gulp.dest 'www/assets')
-    .pipe(livereload())
+    # .pipe(livereload())
 gulp.task 'assets:clean', ['clean'], tasks.assets
 
+gulp.task 'lib', tasks.lib = ->
+  gulp.src(path.app.lib)
+    .pipe(size())
+    .pipe(gulp.dest 'www/lib')
+gulp.task 'lib:clean', ['clean'], tasks.lib
+
 gulp.task 'watch', () ->
-  livereload.listen()
+  # livereload.listen()
+  gulp.watch path.app.lib, ['lib']
   gulp.watch path.app.scripts, ['scripts']
   gulp.watch path.app.styles, ['styles']
   gulp.watch path.app.bower, ['bowerjs', 'bowercss']
@@ -133,4 +141,4 @@ gulp.task 'clean', (cb) ->
 
 gulp.task 'default', ['build', 'watch']
 
-gulp.task 'build', ['scripts:clean', 'styles:clean', 'templates:clean', 'jquery:clean', 'bowerjs:clean', 'bowercss:clean', 'assets:clean']
+gulp.task 'build', ['lib:clean','scripts:clean', 'styles:clean', 'templates:clean', 'jquery:clean', 'bowerjs:clean', 'bowercss:clean', 'assets:clean']
