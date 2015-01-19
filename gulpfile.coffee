@@ -98,7 +98,17 @@ gulp.task 'jquery', tasks.jquery = ->
 gulp.task 'jquery:clean', ['clean'], tasks.jquery
 
 gulp.task 'bowerjs', tasks.bowerjs = ->
-  gulp.src('client/components/**/*.min.js', !'client/components/jquery/dist/jquery.min.js')
+  gulp.src(
+    [
+      'client/components/**/*.min.js',
+      '!client/components/jquery/dist/jquery.min.js',
+      '!client/components/angular/**/*.*',
+      '!client/components/angular-animate/**/*.*',
+      '!client/components/angular-sanitize/**/*.*',
+      '!client/components/angular-ui-router/**/*.*',
+      '!client/components/ionic/**/*.*'
+    ]
+  )
     .pipe(flatten())
     .pipe(concat 'vendor.min.js')
     .pipe(size())
@@ -106,7 +116,16 @@ gulp.task 'bowerjs', tasks.bowerjs = ->
 gulp.task 'bowerjs:clean', ['clean'], tasks.bowerjs
 
 gulp.task 'bowercss', tasks.bowercss = ->
-  gulp.src('client/components/**/*.min.css')
+  gulp.src(
+    [
+      'client/components/**/*.min.css'
+      '!client/components/angular/**/*.*',
+      '!client/components/angular-animate/**/*.*',
+      '!client/components/angular-sanitize/**/*.*',
+      '!client/components/angular-ui-router/**/*.*',
+      '!client/components/ionic/**/*.*'
+    ]
+  )
     .pipe(flatten())
     .pipe(concat 'vendor.min.css')
     .pipe(size())
