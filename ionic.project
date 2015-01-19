@@ -2,7 +2,7 @@
   "name": "mean.ionic.coffee",
   "app_id": "",
   "gulpStartupTasks": [
-    "build", "watch"
+    "build"
   ],
   "watchPatterns": [
     "www/**/*",

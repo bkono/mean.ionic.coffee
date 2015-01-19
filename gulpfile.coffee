@@ -30,7 +30,7 @@ path =
     styles: "client/app/**/*.{scss,sass,css}" # css and scss files
     bower: 'client/components'
     templates: "client/app/**/*.{html,jade}" # All html, jade, and markdown files used as templates within the app
-    images: "client/app/images/*.{png,jpg,jpeg,gif,ico}" # All image files
+    images: "client/app/**/*.{png,jpg,jpeg,gif,ico}" # All image files
     static: "client/app/static/*.*" # Any other static content such as the favicon
     lib: "client/lib/**/*"
 

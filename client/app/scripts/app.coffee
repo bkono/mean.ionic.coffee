@@ -1,16 +1,5 @@
-angular.module 'starter', ['ionic', 'starter.controllers', 'starter.services']
-.run ($ionicPlatform) ->
-  $ionicPlatform.ready ->
-    window.cordova?.plugins.Keyboard?.hideKeyboardAccessoryBar(true)
-    window.StatusBar?.styleDefault()
-
-.config ($stateProvider, $urlRouterProvider) ->
+meanApp.config ($stateProvider, $urlRouterProvider) ->
   $stateProvider
-    .state 'tab',
-      url: '/tab',
-      abstract: true,
-      templateUrl: 'templates/tabs.html'
-
     .state 'tab.dash',
       url: '/dash',
       views:
@@ -52,5 +41,3 @@ angular.module 'starter', ['ionic', 'starter.controllers', 'starter.services']
         'tab-account':
           templateUrl: 'templates/tab-account.html',
           controller: 'AccountCtrl'
-
-  $urlRouterProvider.otherwise('/tab/dash');
