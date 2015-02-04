@@ -1,19 +1,20 @@
-path = require 'path'
-config = require './config'
-express = require 'express'
+path                 = require 'path'
+config               = require './config'
+express              = require 'express'
 
 # express midlewares
-helmet = require 'helmet'
-multipart = require 'connect-multiparty'
-session = require 'express-session'
-sessionStore = require('connect-mongo')({session: session})
-compress = require 'compression'
-bodyParser = require 'body-parser'
-favicon = require 'serve-favicon'
-cookieParser = require 'cookie-parser'
-methodOverride = require 'method-override'
-serveStatic = require 'serve-static'
-errorHandler = require 'errorhandler'
+helmet               = require 'helmet'
+multipart            = require 'connect-multiparty'
+session              = require 'express-session'
+sessionStore         = require('connect-mongo')({session: session})
+compress             = require 'compression'
+bodyParser           = require 'body-parser'
+favicon              = require 'serve-favicon'
+cookieParser         = require 'cookie-parser'
+methodOverride       = require 'method-override'
+serveStatic          = require 'serve-static'
+errorHandler         = require 'errorhandler'
+cors                 = require 'cors'
 
 module.exports = (passport, db, logger, root_path) ->
 
@@ -33,6 +34,9 @@ module.exports = (passport, db, logger, root_path) ->
   app.use helmet.contentTypeOptions()
   app.use helmet.cacheControl()
 
+  # cors
+  app.use cors() # way too loose, tighten up for a real deployment
+  
   # ensure all assets and data are compressed - above static
   app.use compress()
 
