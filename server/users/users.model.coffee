@@ -7,11 +7,17 @@ User = new Schema(
     type: String
     index:
       unique: true
-    required: true
+    required: false
 
   hashed_password:
     type: String
-    required: true
+    required: false
+  facebook:
+    id: {type: String}
+    token: {type: String}
+    firstName: {type: String}
+    lastName: {type: String}
+    email: {type: String}
 )
 
 User.virtual('password').set (password) ->

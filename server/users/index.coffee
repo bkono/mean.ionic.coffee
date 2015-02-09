@@ -4,7 +4,7 @@ user_service = require './users.service'
 express      = require 'express'
 router       = express.Router()
 
-router.get '/', auth.basic, (req, res) ->
+router.get '/', auth.facebook, (req, res) ->
   logger.info 'get all users'
   user_service.getUsers (err, users) ->
     res.send err, users

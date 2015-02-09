@@ -1,7 +1,8 @@
+logger           = require '../config/logger'
 config           = require '../config/config'
 mongoose         = require 'mongoose'
 BasicStrategy    = require('passport-http').BasicStrategy
-FacebookStrategy = require('passport-facebook').FacebookStrategy
+FacebookStrategy = require('passport-facebook').Strategy
 User             = require("../users/users.model")
 
 module.exports = (passport) ->
@@ -22,20 +23,24 @@ module.exports = (passport) ->
   passport.use new FacebookStrategy({
     clientID:     config.facebook.clientID,
     clientSecret: config.facebook.clientSecret,
-    callbackUrl:  confic.facebook.callbackUrl,
+    callbackURL:  config.facebook.callbackURL,
     enableProof:  false
   }, (accessToken, refreshToken, profile, done) ->
-    User.findOrCreate {'facebook.id': profile.id}, (err, user) ->
+    User.findOne {'facebook.id': profile.id}, (err, user) ->
       if err then return done(err)
-        if user then return done(null, user)
+      if user 
+        return done(null, user)
+      else
         fbInfo = {
           id: profile.id,
-          token: token,
+          token: accessToken,
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
           email: profile.emails[0].value
         }
         newUser = new User
           facebook: fbInfo
-        newUser.save (err, user) -> return done(null, user)
+        newUser.save (err, user) -> 
+          if err then return done(err)
+          return done(null, user)
   )

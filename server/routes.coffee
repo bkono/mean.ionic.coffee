@@ -1,6 +1,7 @@
 module.exports = (app) ->
   # Mount module routes here
   app.use '/users', require './users'
+  app.use '/auth', require './auth'
 
   # end module routes
 
