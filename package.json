@@ -38,6 +38,7 @@
     "mongoose": "3.8.x",
     "nodetime": "0.8.x",
     "passport": "0.2.x",
+    "passport-facebook": "^1.0.3",
     "passport-http": "0.2.x",
     "passport-local": "^1.0.0",
     "password-hash": "1.2.x",
