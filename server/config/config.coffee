@@ -4,6 +4,10 @@ base =
   LOGPATH: "mean.coffee.log"
   COOKIE_SECRET: "thisisthesecretforthesession"
   DBURLTEST: "mongodb://localhost/meandb_test"
+  facebook:
+    clientID:     process.env.FACEBOOK_ID || 'id',
+    clientSecret: process.env.FACEBOOK_SECRET || 'secret'
+    callbackURL:  (prcoess.env.DOMAIN || '') + '/auth/facebook/callback'
   twitter:
     clientID:     process.env.TWITTER_ID || 'id',
     clientSecret: process.env.TWITTER_SECRET || 'secret',
